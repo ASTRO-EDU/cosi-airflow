@@ -1,9 +1,11 @@
 
 
 
-docker build --platform linux/arm64 -t gammaenv:1.0.0 -f Dockerfile.arm.2024 .
+docker build --platform linux/arm64 -t airflow:1.0.0 -f Dockerfile .
 
-docker run --rm -t -d -p 8080:8080 --name airflow1 -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v $HOME/devel/cosi:/shared_dir  airflow:1.0.0
+docker build -t airflow:1.0.0 -f Dockerfile .
+
+docker run --rm -t -d -p 8080:8080 --name airflow1 -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /home/cosi/cosi-airflow:/shared_dir  airflow:1.0.0
 
 docker exec -it airflow1 bash
 
